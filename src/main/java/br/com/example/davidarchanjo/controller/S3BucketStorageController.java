@@ -136,10 +136,11 @@ public class S3BucketStorageController {
     ) {
         log.info("Downloading file '{}' from bucket '{}'", fileName, bucketName);
         ByteArrayOutputStream fileContent = service.downloadFile(bucketName, fileName);
+        MediaType contentType = FileMediaType.fromFilename(fileName);
 
         return ResponseEntity.ok()
                 .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + fileName + "\"")
-                .contentType(FileMediaType.fromFilename(fileName))
+                .contentType(contentType)
                 .body(fileContent.toByteArray());
     }
 
