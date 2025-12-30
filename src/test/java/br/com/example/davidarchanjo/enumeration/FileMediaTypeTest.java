@@ -92,7 +92,8 @@ class FileMediaTypeTest {
     })
     void testFromFilename_SupportedExtensions(String filename, String expectedType) {
         MediaType mediaType = FileMediaType.fromFilename(filename);
-        MediaType expected = MediaType.parseMediaType(expectedType.replace('_', '/'));
+        String mediaTypeString = expectedType.replace('_', '/');
+        MediaType expected = MediaType.parseMediaType(mediaTypeString);
 
         assertEquals(expected, mediaType);
     }
