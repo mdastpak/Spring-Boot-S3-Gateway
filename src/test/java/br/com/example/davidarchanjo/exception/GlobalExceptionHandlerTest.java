@@ -24,6 +24,7 @@ import static org.mockito.Mockito.when;
 /**
  * Unit tests for GlobalExceptionHandler
  */
+@SuppressWarnings("null")
 @ExtendWith(MockitoExtension.class)
 class GlobalExceptionHandlerTest {
 
