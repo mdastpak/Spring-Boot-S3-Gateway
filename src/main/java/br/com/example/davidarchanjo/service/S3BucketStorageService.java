@@ -1,57 +1,68 @@
 package br.com.example.davidarchanjo.service;
 
 import java.io.ByteArrayOutputStream;
-import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 
-import com.amazonaws.AmazonClientException;
-
+/**
+ * Service for object storage operations (S3/MinIO)
+ */
 public interface S3BucketStorageService {
 
     /**
-     * Upload file into AWS S3
+     * Upload file to object storage
      *
-     * @param keyName
-     * @param contentLength
-     * @param contentType
-     * @param value
+     * @param bucketName    Bucket name
+     * @param keyName       File key/name
+     * @param contentLength File size in bytes
+     * @param contentType   MIME type
+     * @param value         File input stream
      */
     void uploadFile(
-        final String bucketName,
-        final String keyName, 
-        final Long contentLength, 
-        final String contentType,
-        final InputStream value
-    ) throws AmazonClientException;
+            String bucketName,
+            String keyName,
+            Long contentLength,
+            String contentType,
+            InputStream value
+    );
 
     /**
-     * Downloads file from S3 bucket
+     * Download file from object storage
      *
-     * @param keyName
-     * @return {@link java.io.ByteArrayOutputStream}
-     */    
-    ByteArrayOutputStream downloadFile(
-        final String bucketName,
-        final String keyName
-    ) throws IOException, AmazonClientException;
-
-    /**
-     * Get all files from S3 bucket
-     *
-     * @return {@link java.lang.String}
+     * @param bucketName Bucket name
+     * @param keyName    File key/name
+     * @return File content as byte array stream
      */
-    List<String> listFiles(final String bucketName) throws AmazonClientException;
+    ByteArrayOutputStream downloadFile(
+            String bucketName,
+            String keyName
+    );
 
     /**
-     * Deletes file from S3 bucket
+     * List all files in a bucket
      *
-     * @param fileName
-     * @throws {@link com.amazonaws.AmazonClientException}
+     * @param bucketName Bucket name
+     * @return List of file keys
+     */
+    List<String> listFiles(String bucketName);
+
+    /**
+     * Delete file from object storage
+     *
+     * @param bucketName Bucket name
+     * @param keyName    File key/name
      */
     void deleteFile(
-        final String bucketName,
-        final String keyName
-    ) throws AmazonClientException;
+            String bucketName,
+            String keyName
+    );
 
+    /**
+     * Check if bucket exists
+     *
+     * @param bucketName Bucket name
+     * @return true if bucket exists
+     */
+    boolean bucketExists(String bucketName);
 }
+

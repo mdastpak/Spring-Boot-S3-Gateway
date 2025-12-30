@@ -1,6 +1,72 @@
 spring:
+  application:
+    name: object-storage-service
+
+  profiles:
+    active: ${ACTIVE_PROFILE:s3}
+
   servlet:
     multipart:
       enabled: true
-      max-file-size: 10MB
-      max-request-size: 10MB
+      max-file-size: ${MAX_FILE_SIZE:10MB}
+      max-request-size: ${MAX_REQUEST_SIZE:10MB}
+
+server:
+  port: ${SERVER_PORT:8080}
+  servlet:
+    context-path: /
+
+# Actuator configuration
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics,prometheus
+      base-path: /actuator
+  endpoint:
+    health:
+      show-details: always
+      show-components: always
+  health:
+    defaults:
+      enabled: true
+  info:
+    env:
+      enabled: true
+
+# API Documentation
+springdoc:
+  api-docs:
+    path: /api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+    enabled: true
+    operations-sorter: method
+    tags-sorter: alpha
+  show-actuator: false
+
+# Application info
+info:
+  app:
+    name: ${spring.application.name}
+    description: Object Storage Microservice (S3/MinIO compatible)
+    version: 0.0.1-SNAPSHOT
+    encoding: "@project.build.sourceEncoding@"
+    java:
+      version: "@java.version@"
+
+# Logging
+logging:
+  level:
+    root: INFO
+    br.com.example.davidarchanjo: DEBUG
+    software.amazon.awssdk: WARN
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"
+    file: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
+
+# Storage configuration (common defaults)
+storage:
+  provider: ${STORAGE_PROVIDER:s3}
+  region: ${STORAGE_REGION:us-east-1}
+  max-file-size-mb: ${MAX_FILE_SIZE_MB:10}

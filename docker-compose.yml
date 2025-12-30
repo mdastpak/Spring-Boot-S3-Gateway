@@ -1,0 +1,69 @@
+version: '3.8'
+
+# ============================================================================
+# S3/MinIO Storage Gateway Service - Docker Compose
+# ============================================================================
+# This docker-compose file is for the gateway service ONLY.
+# It connects to EXTERNAL S3/MinIO services.
+#
+# For local development/testing, you can optionally run MinIO using:
+# docker-compose -f docker-compose.dev.yml up
+# ============================================================================
+
+services:
+  # Storage Gateway Service (This microservice)
+  storage-gateway:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: storage-gateway
+    ports:
+      - "${SERVER_PORT:-8080}:8080"
+    environment:
+      # Spring Profile
+      SPRING_PROFILES_ACTIVE: ${SPRING_PROFILES_ACTIVE:-production}
+
+      # External S3/MinIO Configuration
+      STORAGE_PROVIDER: ${STORAGE_PROVIDER:-s3}
+      STORAGE_REGION: ${STORAGE_REGION:-us-east-1}
+      STORAGE_ENDPOINT_URL: ${STORAGE_ENDPOINT_URL}
+      STORAGE_ACCESS_KEY: ${STORAGE_ACCESS_KEY}
+      STORAGE_SECRET_KEY: ${STORAGE_SECRET_KEY}
+      STORAGE_PATH_STYLE_ACCESS: ${STORAGE_PATH_STYLE_ACCESS:-false}
+
+      # Multi-Tenancy Configuration
+      STORAGE_BUCKET_STRATEGY: ${STORAGE_BUCKET_STRATEGY:-SHARED_WITH_PREFIX}
+      STORAGE_SHARED_BUCKET: ${STORAGE_SHARED_BUCKET:-shared-storage}
+      STORAGE_BUCKET_SUFFIX: ${STORAGE_BUCKET_SUFFIX:-storage}
+      STORAGE_AUTO_CREATE_BUCKETS: ${STORAGE_AUTO_CREATE_BUCKETS:-true}
+      STORAGE_DUPLICATE_FILE_STRATEGY: ${STORAGE_DUPLICATE_FILE_STRATEGY:-UUID_SUFFIX}
+
+      # Security
+      STORAGE_MULTI_TENANCY_ENABLED: ${STORAGE_MULTI_TENANCY_ENABLED:-true}
+      STORAGE_REQUIRE_API_KEY: ${STORAGE_REQUIRE_API_KEY:-true}
+      STORAGE_ENFORCE_QUOTA: ${STORAGE_ENFORCE_QUOTA:-true}
+
+      # Application
+      SERVER_PORT: 8080
+      JAVA_OPTS: "-Xmx512m -Xms256m"
+
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:8080/actuator/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+    restart: unless-stopped
+
+    networks:
+      - storage-network
+
+    labels:
+      - "app=storage-gateway"
+      - "version=0.0.1"
+      - "environment=${SPRING_PROFILES_ACTIVE:-production}"
+
+networks:
+  storage-network:
+    driver: bridge

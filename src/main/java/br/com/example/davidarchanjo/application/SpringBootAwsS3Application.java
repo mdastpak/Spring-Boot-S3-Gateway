@@ -8,8 +8,8 @@ import org.springframework.boot.autoconfigure.domain.EntityScan;
 @SpringBootApplication(scanBasePackages = "br.com.example.davidarchanjo")
 public class SpringBootAwsS3Application {
 
-	public static void main(String[] args) {
-		SpringApplication.run(SpringBootAwsS3Application.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(SpringBootAwsS3Application.class, args);
+    }
 
 }

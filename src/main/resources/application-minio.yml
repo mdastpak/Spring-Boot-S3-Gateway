@@ -1,0 +1,22 @@
+# MinIO Profile Configuration
+storage:
+  provider: minio
+  region: ${MINIO_REGION:us-east-1}
+  # MinIO access credentials (required)
+  access-key: ${MINIO_ACCESS_KEY:minioadmin}
+  secret-key: ${MINIO_SECRET_KEY:minioadmin}
+  # MinIO endpoint URL (required)
+  endpoint-url: ${MINIO_ENDPOINT_URL:http://localhost:9000}
+  # Default bucket (optional)
+  default-bucket: ${MINIO_DEFAULT_BUCKET:test-bucket}
+  # Path-style access (required for MinIO)
+  path-style-access: true
+
+logging:
+  level:
+    br.com.example.davidarchanjo: DEBUG
+    software.amazon.awssdk: INFO
+
+info:
+  app:
+    profile: MinIO

@@ -1,0 +1,22 @@
+# AWS S3 Profile Configuration
+storage:
+  provider: s3
+  region: ${AWS_REGION:us-east-1}
+  # Access key and secret key - use environment variables or AWS credentials chain
+  access-key: ${AWS_ACCESS_KEY_ID:}
+  secret-key: ${AWS_SECRET_ACCESS_KEY:}
+  # Default bucket (optional)
+  default-bucket: ${S3_DEFAULT_BUCKET:}
+  # Path-style access (false for S3, true for MinIO)
+  path-style-access: false
+  # Custom endpoint (not needed for AWS S3, uses default)
+  endpoint-url: ${S3_ENDPOINT_URL:}
+
+logging:
+  level:
+    br.com.example.davidarchanjo: INFO
+    software.amazon.awssdk: WARN
+
+info:
+  app:
+    profile: AWS S3

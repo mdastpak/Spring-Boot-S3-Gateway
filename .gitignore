@@ -1,30 +1,249 @@
+#########################
+# Spring Boot / Maven
+#########################
 HELP.md
-/target/
+target/
 !.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
+*.class
+*.jar
+*.war
+*.ear
+*.log
 
-### STS ###
+# Maven
+.mvn/timing.properties
+.mvn/wrapper/maven-wrapper.jar
+dependency-reduced-pom.xml
+buildNumber.properties
+.mvn/wrapper/MavenWrapperDownloader.java
+
+#########################
+# IDE - IntelliJ IDEA
+#########################
+.idea/
+*.iws
+*.iml
+*.ipr
+out/
+.idea_modules/
+atlassian-ide-plugin.xml
+com_crashlytics_export_strings.xml
+crashlytics.properties
+crashlytics-build.properties
+fabric.properties
+
+#########################
+# IDE - Eclipse / STS
+#########################
 .apt_generated
 .classpath
 .factorypath
 .project
-.settings
+.settings/
 .springBeans
 .sts4-cache
+bin/
+.metadata/
+.recommenders/
+*.launch
+.loadpath
+.externalToolBuilders/
+.cproject
+.buildpath
+.target
+local.properties
 
-### IntelliJ IDEA ###
-.idea
-*.iws
-*.iml
-*.ipr
-
-### NetBeans ###
+#########################
+# IDE - NetBeans
+#########################
 /nbproject/private/
 /nbbuild/
 /dist/
 /nbdist/
 /.nb-gradle/
-/build/
-bin
+build/
+nbbuild/
+dist/
+nbdist/
+.nb-gradle/
+nb-configuration.xml
 
-### VS Code ###
+#########################
+# IDE - VS Code
+#########################
 .vscode/
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+*.code-workspace
+.history/
+
+#########################
+# Operating System Files
+#########################
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
+
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+[Dd]esktop.ini
+$RECYCLE.BIN/
+*.cab
+*.msi
+*.msix
+*.msm
+*.msp
+*.lnk
+
+# Linux
+*~
+.fuse_hidden*
+.directory
+.Trash-*
+.nfs*
+
+#########################
+# Logs and Databases
+#########################
+*.log
+*.log.*
+logs/
+log/
+spring.log
+application.log
+*.log.gz
+*.sql
+*.sqlite
+*.db
+*.h2.db
+
+#########################
+# Security & Credentials
+#########################
+# NEVER commit these files!
+.env
+.env.local
+.env.*.local
+*.pem
+*.key
+*.p12
+*.jks
+*.keystore
+*.truststore
+credentials.json
+secrets.yml
+secrets.yaml
+application-secret*.yml
+application-secret*.yaml
+application-secret*.properties
+*-credentials.json
+aws-credentials
+gcp-credentials.json
+service-account.json
+
+#########################
+# Docker
+#########################
+docker-compose.override.yml
+.dockerignore
+
+#########################
+# Temporary Files
+#########################
+*.tmp
+*.temp
+*.swp
+*.swo
+*~.nib
+*.bak
+*.cache
+*.pid
+*.seed
+*.pid.lock
+
+#########################
+# Testing & Coverage
+#########################
+.coverage
+coverage/
+*.cover
+*.py,cover
+htmlcov/
+.tox/
+.nox/
+.hypothesis/
+.pytest_cache/
+junit/
+test-output/
+test-results/
+allure-results/
+allure-report/
+
+#########################
+# Build Tools
+#########################
+# Gradle
+.gradle/
+gradle-app.setting
+!gradle-wrapper.jar
+.gradletasknamecache
+
+#########################
+# Application Specific
+#########################
+# Uploaded files (if stored locally during dev)
+uploads/
+storage/
+data/
+tmp/
+
+# Generated documentation
+docs/generated/
+
+# Node modules (if frontend included)
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+yarn.lock
+
+#########################
+# Backup Files
+#########################
+*.orig
+*.rej
+*.bak
+*.backup
+*~
+
+#########################
+# Other
+#########################
+.cache/
+.vagrant/
+*.dump
+heap.bin
+replay_pid*
