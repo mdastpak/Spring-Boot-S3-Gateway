@@ -11,10 +11,11 @@ import org.springframework.web.multipart.MultipartFile;
 public class FileUploadRequest {
 
     @NotNull(message = "File is required")
-    @Schema(description = "File to upload", required = true)
+    @Schema(description = "File to upload", requiredMode = Schema.RequiredMode.REQUIRED)
     private MultipartFile file;
 
     @NotBlank(message = "File name is required")
-    @Schema(description = "Custom file name in storage", example = "document.pdf", required = true)
+    @Schema(description = "Custom file name in storage", example = "document.pdf",
+            requiredMode = Schema.RequiredMode.REQUIRED)
     private String fileName;
 }
